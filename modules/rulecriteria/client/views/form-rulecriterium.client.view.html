@@ -1,0 +1,24 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.rulecriterium._id ? 'Edit Rulecriterium' : 'New Rulecriterium'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.rulecriteriumForm" class="form-horizontal" ng-submit="vm.save(vm.form.rulecriteriumForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="vm.rulecriterium.name" id="name" class="form-control" placeholder="Name" required>
+          <div ng-messages="vm.form.rulecriteriumForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Rulecriterium name is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.rulecriterium._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

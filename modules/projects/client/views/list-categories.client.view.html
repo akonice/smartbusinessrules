@@ -1,0 +1,42 @@
+<section>
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Catégories
+                <a class="btn btn-primary pull-right" data-ui-sref="admin.categories.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+        </h1>
+      </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
+      </div>
+      
+    </div>    
+
+  </div>
+  <table class="table tables-list">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Username</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="category in vm.categories" data-ui-sref="admin.categories.edit({categoryId: category._id})" class="vlist-group-item">
+     <!-- <th  scope="row">{{$index}}</th> -->
+      <td data-ng-bind="category.title">Mark</td>
+      <td data-ng-bind="category.description">Otto</td>
+      <td>@mdo</td>
+    </tr>
+  </tbody>
+</table>
+   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+
+  <div class="alert alert-warning text-center" data-ng-if="categories.$resolved && !categories.length">
+    No categories yet, why don't you <a data-ui-sref="admin.categories.create">create one</a>?
+  </div>
+
+</section>

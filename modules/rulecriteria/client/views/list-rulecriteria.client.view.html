@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Rulecriteria</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="rulecriterium in vm.rulecriteria"
+       ui-sref="rulecriteria.view({ rulecriteriumId: rulecriterium._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="rulecriterium.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="rulecriterium.user" ng-bind="rulecriterium.user.displayName"></span>
+        <span ng-if="!rulecriterium.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="rulecriterium.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.rulecriteria.$resolved && !vm.rulecriteria.length">
+    No Rulecriteria yet, why don't you <a ui-sref="rulecriteria.create">create one</a>?
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<section>
+  <div class="page-header">
+    <h1>
+      Projects
+      <a class="btn btn-primary pull-right" data-ui-sref="projects.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
+  </div>
+  <table class="table tables-list">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="project in vm.projects" data-ui-sref="projects.details.edit({projectId: project._id})" class="vlist-group-item">
+     <!-- <th  scope="row">{{$index}}</th> -->
+      <td data-ng-bind="project.name">Mark</td>
+      <td data-ng-bind="project.description">Mark</td>
+    </tr>
+  </tbody>
+</table>
+   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+
+  <div class="alert alert-warning text-center" data-ng-if="categories.$resolved && !categories.length">
+    No categories yet, why don't you <a data-ui-sref="admin.categories.create">create one</a>?
+  </div>
+
+</section>
