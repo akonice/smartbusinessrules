@@ -7,7 +7,7 @@
 
   ProjectsCategoriesListController.$inject = ['$scope', '$filter','CategoriesService'];
 
-  function ProjectsCategoriesListController(CategoriesService) {
+  function ProjectsCategoriesListController($scope,$filter,CategoriesService) {
     var vm = this;
 
     vm.buildPager = buildPager;
