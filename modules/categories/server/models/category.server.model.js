@@ -31,6 +31,10 @@ var CategorySchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  project:{
+      type: Schema.ObjectId,
+      ref: 'Project'
   }
 });
 

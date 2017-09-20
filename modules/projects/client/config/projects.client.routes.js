@@ -57,17 +57,28 @@
           roles: ['user', 'admin']
         }
       })
-      .state('projects.details.categories', {
-        url: '/categories',
-        templateUrl: '/modules/projects/client/views/list-categories.client.view.html',
-        controller: 'ProjectsCategoriesListController',
-        controllerAs: 'vm',
-        resolve: {
-          projectResolve: getProject
-        },        
+      .state('projects.details.edit.categories',{
+        url: '/categories',       
         data: {
           roles: ['user', 'admin']
-        }
+        },
+        onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: '/modules/projects/client/views/edit-categories.client.view.html',
+                    controller: 'ProjectsCategoriesEditController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        projectResolve: getProject,
+                        categoryResolve:newCategorie
+                    }
+                }).result.then(function() {
+                    $state.go('^', {}, { reload: false });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
       })      
       .state('projects.view', {
         url: '/:projectId',
@@ -92,8 +103,22 @@
   }
 
   newProject.$inject = ['ProjectsService'];
-
   function newProject(ProjectsService) {
     return new ProjectsService();
+  }
+  
+  
+  getCategorie.$inject = ['$stateParams', 'CategoriesService'];
+
+  function getCategorie($stateParams, CategoriesService) {
+    return CategoriesService.get({
+      categoryId: $stateParams.categoryId
+    }).$promise;
+  }
+
+  newCategorie.$inject = ['CategoriesService'];
+
+  function newCategorie(CategoriesService) {
+    return new CategoriesService();
   }
 }());

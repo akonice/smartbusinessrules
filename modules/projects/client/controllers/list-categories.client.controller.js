@@ -5,9 +5,9 @@
     .module('projects')
     .controller('ProjectsCategoriesListController', ProjectsCategoriesListController);
 
-  ProjectsCategoriesListController.$inject = ['$scope', '$filter','CategoriesService'];
+  ProjectsCategoriesListController.$inject = ['$scope', '$filter','CategoriesService','projectResolve'];
 
-  function ProjectsCategoriesListController($scope,$filter,CategoriesService) {
+  function ProjectsCategoriesListController($scope,$filter,CategoriesService,projectResolve) {
     var vm = this;
 
     vm.buildPager = buildPager;
