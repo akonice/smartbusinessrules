@@ -4,6 +4,7 @@
  * Module dependencies
  */
 var mongoose = require('mongoose'),
+  mongooseHistory = require('mongoose-history'),
   Schema = mongoose.Schema,
   path = require('path'),
   config = require(path.resolve('./config/config')),
@@ -35,11 +36,16 @@ var CategorySchema = new Schema({
   project:{
       type: Schema.ObjectId,
       ref: 'Project'
+  },
+  host : {
+    type: String
   }
 });
 
 CategorySchema.statics.seed = seed;
 
+var options = {indexes: [{'t': -1, 'd._id': 1}]};
+CategorySchema.plugin(mongooseHistory, options);
 mongoose.model('Category', CategorySchema);
 
 /**

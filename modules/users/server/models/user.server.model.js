@@ -4,6 +4,7 @@
  * Module dependencies
  */
 var mongoose = require('mongoose'),
+  mongooseHistory = require('mongoose-history'),
   path = require('path'),
   config = require(path.resolve('./config/config')),
   Schema = mongoose.Schema,
@@ -126,6 +127,11 @@ var UserSchema = new Schema({
   resetPasswordExpires: {
     type: Date
   }
+  ,
+  host : {
+    type: String
+  },
+  projectList : [{ type : ObjectId, ref: 'Project' }]
 });
 
 /**
@@ -233,6 +239,8 @@ UserSchema.statics.generateRandomPassphrase = function () {
 
 UserSchema.statics.seed = seed;
 
+var options = {indexes: [{'t': -1, 'd._id': 1}]};
+UserSchema.plugin(mongooseHistory, options);
 mongoose.model('User', UserSchema);
 
 /**

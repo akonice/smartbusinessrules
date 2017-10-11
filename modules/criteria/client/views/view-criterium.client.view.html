@@ -1,0 +1,26 @@
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.criterium.name"></h1>
+  </div>
+  <div class="pull-right"
+       ng-show="vm.criterium.isCurrentUserOwner">
+    <a class="btn btn-primary"
+       ui-sref="criteria.edit({ criteriumId: vm.criterium._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.criterium.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.criterium.user"
+            ng-bind="vm.criterium.user.displayName"></span>
+      <span ng-if="!vm.criterium.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" ng-bind="vm.criterium.content"></p>
+</section>
